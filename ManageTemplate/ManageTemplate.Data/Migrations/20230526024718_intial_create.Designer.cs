@@ -12,8 +12,8 @@ using MusicApp.Data.Contexts;
 namespace ManageTemplate.Data.Migrations
 {
     [DbContext(typeof(TemplateDbContext))]
-    [Migration("20230525223637_initial_section_template")]
-    partial class initial_section_template
+    [Migration("20230526024718_intial_create")]
+    partial class intial_create
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -119,7 +119,7 @@ namespace ManageTemplate.Data.Migrations
             modelBuilder.Entity("ManageTemplate.Core.Entities.SampledData", b =>
                 {
                     b.HasOne("ManageTemplate.Core.Entities.Section", "Section")
-                        .WithMany("SampledDatas")
+                        .WithMany("ExampledDatas")
                         .HasForeignKey("SectionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -145,7 +145,7 @@ namespace ManageTemplate.Data.Migrations
 
             modelBuilder.Entity("ManageTemplate.Core.Entities.Section", b =>
                 {
-                    b.Navigation("SampledDatas");
+                    b.Navigation("ExampledDatas");
                 });
 #pragma warning restore 612, 618
         }

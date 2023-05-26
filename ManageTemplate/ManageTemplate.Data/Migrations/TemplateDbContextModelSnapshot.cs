@@ -60,6 +60,9 @@ namespace ManageTemplate.Data.Migrations
                     b.Property<string>("Data")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("Enable")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -88,6 +91,9 @@ namespace ManageTemplate.Data.Migrations
                     b.Property<Guid>("CategoryId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<bool>("Enable")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Hbs")
                         .HasColumnType("nvarchar(max)");
 
@@ -110,7 +116,7 @@ namespace ManageTemplate.Data.Migrations
             modelBuilder.Entity("ManageTemplate.Core.Entities.SampledData", b =>
                 {
                     b.HasOne("ManageTemplate.Core.Entities.Section", "Section")
-                        .WithMany("SampledDatas")
+                        .WithMany("ExampledDatas")
                         .HasForeignKey("SectionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -136,7 +142,7 @@ namespace ManageTemplate.Data.Migrations
 
             modelBuilder.Entity("ManageTemplate.Core.Entities.Section", b =>
                 {
-                    b.Navigation("SampledDatas");
+                    b.Navigation("ExampledDatas");
                 });
 #pragma warning restore 612, 618
         }

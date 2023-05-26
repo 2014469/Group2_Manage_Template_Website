@@ -1,5 +1,4 @@
-﻿
-using ManageTemplate.Core.Entities;
+﻿using ManageTemplate.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -32,7 +31,6 @@ namespace ManageTemplate.Data.Mappings
         .HasForeignKey(sd => sd.SectionId)
         .HasConstraintName("FK_SampledDatas_Sections")
         .OnDelete(DeleteBehavior.Cascade);
-
     }
   }
 }

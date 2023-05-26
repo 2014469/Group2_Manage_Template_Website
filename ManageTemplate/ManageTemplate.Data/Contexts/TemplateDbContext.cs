@@ -1,9 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ManageTemplate.Core.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace MusicApp.Data.Contexts
 {
   public class TemplateDbContext : DbContext
   {
+    public DbSet<Category> Categories { get; set; }
+    public DbSet<Section> Sections { get; set; }
+    public DbSet<SampledData> SampledDatas { get; set; }
 
 
     public TemplateDbContext(DbContextOptions<TemplateDbContext> options) : base(options)
