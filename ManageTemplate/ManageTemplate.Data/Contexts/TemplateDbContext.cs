@@ -1,7 +1,7 @@
 ﻿using ManageTemplate.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace MusicApp.Data.Contexts
+namespace ManageTemplate.Data.Contexts
 {
   public class TemplateDbContext : DbContext
   {

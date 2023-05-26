@@ -1,7 +1,9 @@
 ﻿using Carter;
+using ManageTemplate.Data.Contexts;
 using ManageTemplate.Data.Seeders;
+using ManageTemplate.Services.Musics.Categories;
+using ManageTemplate.Services.Templates.Categories;
 using Microsoft.EntityFrameworkCore;
-using MusicApp.Data.Contexts;
 
 namespace ManageTemplate.WebApi.Extensions
 {
@@ -13,11 +15,13 @@ namespace ManageTemplate.WebApi.Extensions
       builder.Services.AddCarter();
       builder.Services.AddMemoryCache();
       builder.Services.AddDbContext<TemplateDbContext>(options =>
-        options.UseSqlServer(
-          builder.Configuration
-            .GetConnectionString("DefaultConnection")));
+          options.UseSqlServer(
+            builder.Configuration
+              .GetConnectionString("DefaultConnection")));
 
       builder.Services.AddScoped<IDataSeeder, DataSeeder>();
+
+      builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
       return builder;
     }

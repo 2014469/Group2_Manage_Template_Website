@@ -1,6 +1,5 @@
-﻿
-using ManageTemplate.Core.Entities;
-using MusicApp.Data.Contexts;
+﻿using ManageTemplate.Core.Entities;
+using ManageTemplate.Data.Contexts;
 
 namespace ManageTemplate.Data.Seeders
 {
@@ -25,6 +24,7 @@ namespace ManageTemplate.Data.Seeders
 
       var categories = AddCategories();
       var sections = AddSections(categories);
+      var sampledDatas = AddSampledDatas(sections);
     }
 
     public IList<Category> AddCategories()
@@ -205,10 +205,439 @@ namespace ManageTemplate.Data.Seeders
       _dbContext.AddRange(sectionsToAdd);
       _dbContext.SaveChanges();
 
-
-
-
       return sections;
+    }
+
+    private IList<SampledData> AddSampledDatas(IList<Section> sections)
+    {
+      var sampledDatas = new List<SampledData>() {
+          //article1 : Long
+          new SampledData()
+          {
+            Name="title",
+            Data="Sample section",
+            Type="string",
+            Title="Section title",
+            Section=sections[0]
+          },
+          new SampledData()
+          {
+            Name="description",
+            Data="Lorem ipsum dolor sit amet.",
+            Type="string",
+            Title="Section description",
+            Section=sections[0]
+          },
+          new SampledData()
+          {
+            Name="image1",
+            Data="https://via.placeholder.com/450x450",
+            Type="string",
+            Title="Url to image #1",
+            Section=sections[0]
+          },
+          new SampledData()
+          {
+            Name="image2",
+            Data="https://via.placeholder.com/450x450",
+            Type="string",
+            Title="Url to image #2",
+            Section=sections[0]
+          },
+          new SampledData()
+          {
+            Name="image3",
+            Data="https://via.placeholder.com/450x450",
+            Type="string",
+            Title="Url to image #3",
+            Section=sections[0]
+          },
+          new SampledData()
+          {
+            Name="articleTitle1",
+            Data="Hello world",
+            Type="string",
+            Title="Title for the article #1",
+            Section=sections[0]
+          },
+          new SampledData()
+          {
+            Name="articleTitle2",
+            Data="Hello world",
+            Type="string",
+            Title="Title for the article #2",
+            Section=sections[0]
+          },
+          new SampledData()
+          {
+            Name="articleTitle3",
+            Data="Hello world",
+            Type="string",
+            Title="Title for the article #3",
+            Section=sections[0]
+          },
+          new SampledData()
+          {
+            Name="text1",
+            Data="Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit id.",
+            Type="string",
+            Title="Content for the article #1",
+            Section=sections[0]
+          },
+          new SampledData()
+          {
+            Name="text2",
+            Data="Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit id.",
+            Type="string",
+            Title="Content for the article #2",
+            Section=sections[0]
+          },
+          new SampledData()
+          {
+            Name="text3",
+            Data="Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit id.",
+            Type="string",
+            Title="Content for the article #3",
+            Section=sections[0]
+          },
+          // article 2: long
+          new SampledData()
+          {
+            Name="title",
+            Data="Sample section",
+            Type="string",
+            Title="Section title",
+            Section=sections[0]
+          },
+          new SampledData()
+          {
+            Name="description",
+            Data="Lorem ipsum dolor sit amet.",
+            Type="string",
+            Title="Section description",
+            Section=sections[0]
+          },
+          new SampledData()
+          {
+            Name="articleTitle1",
+            Data="Hello World",
+            Type="string",
+            Title="Title for the article #1",
+            Section=sections[0]
+          },
+          new SampledData()
+          {
+            Name="articleTitle2",
+            Data="Hello world",
+            Type="string",
+            Title="Title for the article #2",
+            Section=sections[0]
+          },
+          new SampledData()
+          {
+            Name="articleTitle3",
+            Data="Hello world",
+            Type="string",
+            Title="Title for the article #3",
+            Section=sections[0]
+          },
+          new SampledData()
+          {
+            Name="text1",
+            Data="Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit id.",
+            Type="string",
+            Title="Content for the article #1",
+            Section=sections[0]
+          },
+          new SampledData()
+          {
+            Name="text2",
+            Data="Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit id.",
+            Type="string",
+            Title="Content for the article #2",
+            Section=sections[0]
+          },
+          new SampledData()
+          {
+            Name="text3",
+            Data="Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit id.",
+            Type="string",
+            Title="Content for the article #3",
+            Section=sections[0]
+          },
+          // gallery2: Tien
+          new SampledData()
+          {
+            Name="img1",
+            Data="https://via.placeholder.com/450x450",
+            Type="string",
+            Title="Url to image #1",
+            Section=sections[2]
+          },
+          new SampledData()
+          {
+            Name="img2",
+            Data="https://via.placeholder.com/450x450",
+            Type="string",
+            Title="Url to image #2",
+            Section=sections[2]
+          },
+          new SampledData()
+          {
+            Name="alt1",
+            Data="Sample image",
+            Type="string",
+            Title="Alt for image #1",
+            Section=sections[2]
+          },
+          new SampledData()
+          {
+            Name="alt2",
+            Data="Sample image",
+            Type="string",
+            Title="Alt for image #2",
+            Section=sections[2]
+          },
+          // gallery3: Tien
+          new SampledData()
+          {
+            Name="img1",
+            Data="https://via.placeholder.com/450x450",
+            Type="string",
+            Title="Url to image #1",
+            Section=sections[4]
+          },
+          new SampledData()
+          {
+            Name="img2",
+            Data="https://via.placeholder.com/450x450",
+            Type="string",
+            Title="Url to image #2",
+            Section=sections[4]
+          },
+          new SampledData()
+          {
+            Name="img3",
+            Data="https://via.placeholder.com/450x450",
+            Type="string",
+            Title="Url to image #3",
+            Section=sections[4]
+          },
+          new SampledData()
+          {
+            Name="alt1",
+            Data="Sample image",
+            Type="string",
+            Title="Alt for image #1",
+            Section=sections[4]
+          },
+          new SampledData()
+          {
+            Name="alt2",
+            Data="Sample image",
+            Type="string",
+            Title="Alt for image #2",
+            Section=sections[4]
+          },
+          new SampledData()
+          {
+            Name="alt3",
+            Data="Sample image",
+            Type="string",
+            Title="Alt for image #3",
+            Section=sections[4]
+          },
+          // gallery4: Hung
+          
+          new SampledData()
+          {
+            Name="img1",
+            Data="https://via.placeholder.com/450x450",
+            Type="string",
+            Title="Url to image #1",
+            Section=sections[5]
+          },
+          new SampledData()
+          {
+            Name="img2",
+            Data="https://via.placeholder.com/450x450",
+            Type="string",
+            Title="Url to image #2",
+            Section=sections[5]
+          },
+          new SampledData()
+          {
+            Name="img3",
+            Data="https://via.placeholder.com/450x450",
+            Type="string",
+            Title="Url to image #3",
+            Section=sections[5]
+          },
+          new SampledData()
+          {
+            Name="img4",
+            Data="https://via.placeholder.com/450x450",
+            Type="string",
+            Title="Url to image #4",
+            Section=sections[5]
+          },
+          new SampledData()
+          {
+            Name="alt1",
+            Data="https://via.placeholder.com/450x450",
+            Type="string",
+            Title="Alt to image #1",
+            Section=sections[5]
+          },
+          new SampledData()
+          {
+            Name="alt2",
+            Data="https://via.placeholder.com/450x450",
+            Type="string",
+            Title="Alt to image #2",
+            Section=sections[5]
+          },
+          new SampledData()
+          {
+            Name="alt3",
+            Data="https://via.placeholder.com/450x450",
+            Type="string",
+            Title="Alt to image #3",
+            Section=sections[5]
+          },
+          new SampledData()
+          {
+            Name="alt4",
+            Data="https://via.placeholder.com/450x450",
+            Type="string",
+            Title="Alt to image #4",
+            Section=sections[5]
+          },
+          //header1: Hung
+               new SampledData()
+          {
+            Name="title",
+            Data="Hello World",
+            Type="string",
+            Title="Title",
+            Section=sections[6]
+          },
+                    new SampledData()
+          {
+            Name="tagline",
+            Data="Lorem ipsum dolor sit amet.",
+            Type="string",
+            Title="Tag Line",
+            Section=sections[6]
+          },
+                    new SampledData()
+          {
+            Name="link",
+            Data="Read more",
+            Type="string",
+            Title="Text on the link",
+            Section=sections[6]
+          },   
+
+          // header2: Duat 
+          new SampledData()
+          {
+            Name="title",
+            Data="Hello World",
+            Type="string",
+            Title="Title",
+            Section=sections[7]
+          },
+          new SampledData()
+          {
+            Name="tagline",
+            Data="Lorem ipsum dolor sit amet.",
+            Type="string",
+            Title="Tag Line",
+            Section=sections[7]
+          },
+          new SampledData()
+          {
+            Name="button",
+            Data="Click here",
+            Type="string",
+            Title="Text on the button",
+            Section=sections[7]
+          },
+          new SampledData()
+          {
+            Name="link",
+            Data="Read more",
+            Type="string",
+            Title="Text on the link",
+            Section=sections[7]
+          },
+          // navbar1: Duat
+          new SampledData()
+          {
+            Name="brand",
+            Data="Reynholm",
+            Type="string",
+            Title="Brand name",
+            Section=sections[3]
+          },
+          new SampledData()
+          {
+            Name="link1",
+            Data="Home",
+            Type="string",
+            Title="Link #1",
+            Section=sections[3]
+          },
+          new SampledData()
+          {
+            Name="link2",
+            Data="Feature",
+            Type="string",
+            Title="Link #2",
+            Section=sections[3]
+          },
+          new SampledData()
+          {
+            Name="link3",
+            Data="Pricing",
+            Type="string",
+            Title="Link #3",
+            Section=sections[3]
+          },
+          new SampledData()
+          {
+            Name="link4",
+            Data="About",
+            Type="string",
+            Title="Link #4",
+            Section=sections[3]
+          },
+          new SampledData()
+          {
+            Name="showSearch",
+            Data="1",
+            Type="boolean",
+            Title="Show search",
+            Section=sections[3]
+          },
+          new SampledData()
+          {
+            Name="useDarkTheme",
+            Data="0",
+            Type="boolean",
+            Title="Use dark theme",
+            Section=sections[3]
+          },
+        };
+
+      if (!_dbContext.SampledDatas.Any())
+      {
+        _dbContext.AddRange(sampledDatas);
+        _dbContext.SaveChanges();
+      }
+
+      return sampledDatas;
     }
 
   }
