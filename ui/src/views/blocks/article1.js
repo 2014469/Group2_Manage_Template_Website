@@ -1,33 +1,33 @@
 const hbs = `
 <div>
-  <div class=container>
-    <div class=row>
-      <div class=col-12>
-        <h2 class=text-center>{{title}}</h2>
-        <p class=text-center>{{description}}</p>
+  <div class='container'>
+    <div class='row'>
+      <div class='col-12'>
+        <h2 class='text-center'>{{title}}</h2>
+        <p class='text-center'>{{description}}</p>
       </div>
     </div>
-    <div class=row>
-      <div class=col-sm-6 col-md-4 item>
-        <a href=#>
-            <img class=img-fluid src={{image1}} />
+    <div class='row'>
+      <div class='col-sm-6 col-md-4 item'>
+        <a href='#'>
+            <img class='img-fluid' src='{{image1}}' />
         </a>
-        <h3 class=name>{{articleTitle1}}</h3>
-        <p class=description>{{text1}}</p>
+        <h3 class='name'>{{articleTitle1}}</h3>
+        <p class='description'>{{text1}}</p>
       </div>
-      <div class=col-sm-6 col-md-4 item>
-        <a href=#>
-            <img class=img-fluid src={{image2}} />
+      <div class='col-sm-6 col-md-4 item'>
+        <a href='#'>
+            <img class='img-fluid' src='{{image2}}' />
         </a>
-        <h3 class=name>{{articleTitle2}}</h3>
-        <p class=description>{{text2}}</p>
+        <h3 class='name'>{{articleTitle2}}</h3>
+        <p class='description'>{{text2}}</p>
       </div>
-      <div class=col-sm-6 col-md-4 item>
-        <a href=#>
-            <img class=img-fluid src={{image3}} />
+      <div class='col-sm-6 col-md-4 item'>
+        <a href='#'>
+            <img class='img-fluid' src='{{image3}}' />
         </a>
-        <h3 class=name>{{articleTitle3}}</h3>
-        <p class=description>{{text3}}</p>
+        <h3 class='name'>{{articleTitle3}}</h3>
+        <p class='description'>{{text3}}</p>
       </div>
     </div>
   </div>

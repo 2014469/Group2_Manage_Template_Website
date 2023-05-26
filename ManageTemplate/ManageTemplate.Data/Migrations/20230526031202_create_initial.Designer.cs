@@ -12,8 +12,8 @@ using MusicApp.Data.Contexts;
 namespace ManageTemplate.Data.Migrations
 {
     [DbContext(typeof(TemplateDbContext))]
-    [Migration("20230526024718_intial_create")]
-    partial class intial_create
+    [Migration("20230526031202_create_initial")]
+    partial class create_initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,6 +36,9 @@ namespace ManageTemplate.Data.Migrations
 
                     b.Property<bool>("Enable")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Icon")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");

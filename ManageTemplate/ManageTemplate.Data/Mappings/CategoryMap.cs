@@ -18,6 +18,10 @@ namespace ManageTemplate.Data.Mappings
         .HasMaxLength(200)
         .IsRequired();
 
+      builder.Property(c => c.Icon)
+        .HasMaxLength(200)
+        .IsRequired();
+
       builder.Property(c => c.ImageUrl)
         .HasMaxLength(1000);
 
