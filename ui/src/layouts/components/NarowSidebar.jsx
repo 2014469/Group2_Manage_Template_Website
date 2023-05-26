@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeActiveTab } from 'store/features/config';
 import SideBarIndex from 'constants/SideBarIndex';
+import { getAllCategories } from 'services/CategoriesRepository';
 
 NarrowSidebar.propTypes = {};
 function NarrowSidebar(props) {
@@ -13,6 +14,15 @@ function NarrowSidebar(props) {
   function handleChangeActiveTab(index) {
     dispatch(changeActiveTab(index));
   }
+
+  useEffect(() => {
+    loadCategories();
+
+    async function loadCategories() {
+      var results = await getAllCategories();
+      console.log(results);
+    }
+  }, []);
 
   return (
     <div className='icons-wrapper bg-dark-blue d-flex flex-column justify-content-between'>
