@@ -1,4 +1,5 @@
 ﻿
+using ManageTemplate.Core.Entities;
 using MusicApp.Data.Contexts;
 
 namespace ManageTemplate.Data.Seeders
@@ -15,6 +16,19 @@ namespace ManageTemplate.Data.Seeders
 
     public void Intitalize()
     {
+      _dbContext.Database.EnsureCreated();
+
+      if (_dbContext.Set<Section>().Any())
+      {
+        return;
+      }
+    }
+
+    public IList<Category> AddCategories()
+    {
+      var categories = new List<Category>() { };
+
+      return categories;
     }
 
   }
