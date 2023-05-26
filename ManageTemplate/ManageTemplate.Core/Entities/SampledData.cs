@@ -2,7 +2,7 @@
 
 namespace ManageTemplate.Core.Entities
 {
-  public class ExampledData : IEntity
+  public class SampledData : IEntity
   {
     public Guid Id { get; set; }
     public string Name { get; set; }

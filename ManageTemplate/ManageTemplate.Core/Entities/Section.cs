@@ -14,6 +14,6 @@ namespace ManageTemplate.Core.Entities
     public Guid CategoryId { get; set; }
 
     public Category Category { get; set; }
-    public IList<ExampledData> ExampledDatas { get; set; }
+    public IList<SampledData> ExampledDatas { get; set; }
   }
 }
