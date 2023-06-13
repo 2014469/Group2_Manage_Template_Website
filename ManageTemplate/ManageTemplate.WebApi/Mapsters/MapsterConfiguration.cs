@@ -1,4 +1,6 @@
-﻿using Mapster;
+﻿using ManageTemplate.Core.DTO;
+using ManageTemplate.Core.Entities;
+using Mapster;
 
 namespace ManageTemplate.WebApi.Mapsters
 {

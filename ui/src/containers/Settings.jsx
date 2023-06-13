@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import SideBarIndex from 'constants/SideBarIndex';
+import SidebarSlugLocal from 'constants/SidebarSlugLocal';
 import { changeDocumentId } from 'store/features/layout';
 import staticDocuments from 'views/documents';
+import { selectCategorySidebarPaneState } from 'store/features/sidebarCategorySlice';
 
 Settings.propTypes = {};
 
@@ -11,10 +12,10 @@ function Settings(props) {
   const dispatch = useDispatch();
 
   // global state
-  const { activeTab } = useSelector((state) => state.config);
+  const { slugActiveTab } = useSelector(selectCategorySidebarPaneState);
   const { documentId } = useSelector((state) => state.layout);
 
-  if (activeTab !== SideBarIndex.setting) return null;
+  if (slugActiveTab !== SidebarSlugLocal.setting) return null;
 
   function handleDocumentChange(documentId) {
     dispatch(changeDocumentId(documentId));

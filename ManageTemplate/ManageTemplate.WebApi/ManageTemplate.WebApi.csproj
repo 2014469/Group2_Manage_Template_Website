@@ -24,8 +24,4 @@
     <ProjectReference Include="..\ManageTemplate.Services\ManageTemplate.Services.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\Section\" />
-  </ItemGroup>
-
 </Project>

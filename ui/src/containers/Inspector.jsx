@@ -1,7 +1,8 @@
-import SideBarIndex from 'constants/SideBarIndex';
+import SidebarSlugLocal from 'constants/SidebarSlugLocal';
 import { DebounceInput } from 'react-debounce-input';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeBlockData, deleteBlock } from 'store/features/layout';
+import { selectCategorySidebarPaneState } from 'store/features/sidebarCategorySlice';
 import staticBlocks from 'views/blocks';
 
 Inspector.propTypes = {};
@@ -10,7 +11,7 @@ function Inspector(props) {
   const dispatch = useDispatch();
 
   // global states
-  const { activeTab } = useSelector((state) => state.config);
+  const { slugActiveTab } = useSelector(selectCategorySidebarPaneState);
 
   const { selectedBlockUuid, blocks } = useSelector((state) => state.layout);
 
@@ -21,7 +22,7 @@ function Inspector(props) {
     dispatch(deleteBlock({ blockUuid }));
   }
 
-  if (activeTab !== SideBarIndex.inspector) return null;
+  if (slugActiveTab !== SidebarSlugLocal.inspector) return null;
 
   const block = blocks.find((el) => {
     return el.uuid === selectedBlockUuid;

@@ -10,14 +10,14 @@ namespace ManageTemplate.Services.Extensions
   {
     public static string GetOrderExpression(
       this IPagingParams pagingParams,
-      string defaultColumn = "Id")
+      string defaultColumn = "NAME")
     {
       var column = string.IsNullOrWhiteSpace(pagingParams.SortColumn)
         ? defaultColumn
         : pagingParams.SortColumn;
 
       var order = "ASC".Equals(pagingParams.SortOrder, StringComparison.OrdinalIgnoreCase)
-        ? pagingParams.SortOrder : "DESC";
+        ? pagingParams.SortOrder : "ASC";
 
       return $"{column} {order}";
     }
@@ -27,25 +27,30 @@ namespace ManageTemplate.Services.Extensions
       IPagingParams pagingParams,
       CancellationToken cancellationToken = default)
     {
+      var pageNumber = pagingParams.PageNumber ?? 1;
+      var pageSize = pagingParams.PageSize ?? 10;
+
       if (source.IsNullOrEmpty())
       {
         return new PagedList<T>(
           new List<T>(),
-          pagingParams.PageNumber,
-          pagingParams.PageSize,
+          pageNumber,
+          pageSize,
           0);
       }
       var totalCount = await source.CountAsync(cancellationToken);
+
+
       var items = await source
         .OrderBy(pagingParams.GetOrderExpression())
-        .Skip((pagingParams.PageNumber - 1) * pagingParams.PageSize)
-        .Take(pagingParams.PageSize)
+        .Skip((pageNumber - 1) * pageSize)
+        .Take(pageSize)
         .ToListAsync(cancellationToken);
 
       return new PagedList<T>(
         items,
-        pagingParams.PageNumber,
-        pagingParams.PageSize,
+        pageNumber,
+        pageSize,
         totalCount);
     }
 
@@ -53,7 +58,7 @@ namespace ManageTemplate.Services.Extensions
       this IQueryable<T> source,
       int pageNumber = 1,
       int pageSize = 10,
-      string sortColumn = "Id",
+      string sortColumn = "Name",
       string sortOrder = "DESC",
       CancellationToken cancellationToken = default)
     {

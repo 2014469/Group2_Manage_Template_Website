@@ -1,7 +1,10 @@
 import PreviewMode from 'constants/PreivewMode';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { changePreviewMode } from 'store/features/config';
+import {
+  changePreviewMode,
+  selectCategorySidebarPaneState,
+} from 'store/features/sidebarCategorySlice';
 
 Preview.propTypes = {
   html: PropTypes.node.isRequired,
@@ -12,7 +15,7 @@ function Preview(props) {
 
   const dispatch = useDispatch();
 
-  const { previewMode } = useSelector((state) => state.config);
+  const { previewMode } = useSelector(selectCategorySidebarPaneState);
 
   function handleChangePreviewMode(mode) {
     dispatch(changePreviewMode(mode));

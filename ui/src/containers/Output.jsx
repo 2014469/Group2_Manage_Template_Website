@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SideBarIndex from 'constants/SideBarIndex';
+import SidebarSlugLocal from 'constants/SidebarSlugLocal';
 import { useSelector } from 'react-redux';
 
 Output.propTypes = {
@@ -11,9 +11,9 @@ function Output(props) {
   const { html } = props;
 
   // global state
-  const { activeTab } = useSelector((state) => state.config);
+  const { activeTab } = useSelector((state) => state.sidebarCategory);
 
-  if (activeTab !== SideBarIndex.output) return null;
+  if (activeTab !== SidebarSlugLocal.output) return null;
 
   return (
     <div>

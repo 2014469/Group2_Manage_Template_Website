@@ -1,22 +1,26 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import Preview from 'components/Preview';
-import SideBarIndex from 'constants/SideBarIndex';
-import BlocksGallery from 'containers/BlocksGallery';
+import SidebarSlugLocal from 'constants/SidebarSlugLocal';
+import SectionsGallery from 'containers/SectionsGallery';
 import Inspector from 'containers/Inspector';
 import Output from 'containers/Output';
 import Search from 'containers/Search';
 import Settings from 'containers/Settings';
 import NarrowSidebar from 'layouts/components/NarowSidebar';
 import WideSidebar from 'layouts/components/WideSidebar';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeActiveTab } from 'store/features/config';
+import {
+  changeSlugActiveTab,
+  selectCategorySidebarPaneState,
+} from 'store/features/sidebarCategorySlice';
 import {
   pushBlock,
   reorderLayout,
   setSelectedBlock,
 } from 'store/features/layout';
 import RenderHanldebars from 'utils/renderHandlebars';
+import SectionsRepository from 'services/SectionsRepository';
 
 Home.propTypes = {};
 
@@ -25,10 +29,11 @@ function Home(props) {
 
   // global state
   const layout = useSelector((state) => state.layout);
-  const config = useSelector((state) => state.config);
+  const categorySidebarPane = useSelector(selectCategorySidebarPaneState);
 
   // destruct
-  const { activeTab, previewMode } = config;
+  const { slugActiveTab, previewMode } = categorySidebarPane;
+
   const { blocks, documentId } = layout;
 
   const innerHTML = RenderHanldebars();
@@ -54,7 +59,7 @@ function Home(props) {
     const { event, blockId, newOrder } = evt.data;
     if (event) {
       if (blockId && event === 'click') {
-        dispatch(changeActiveTab(SideBarIndex.inspector));
+        dispatch(changeSlugActiveTab(SidebarSlugLocal.inspector));
         dispatch(setSelectedBlock({ blockUuid: blockId }));
       } else if (newOrder && event === 'sorted') {
         handleReorderLayout(newOrder);
@@ -74,15 +79,15 @@ function Home(props) {
     <div className='d-flex'>
       <NarrowSidebar />
       <WideSidebar>
+        <Inspector />
         <Search onPushBlock={handlePushBlock} />
         <Settings />
-        <BlocksGallery
-          index={SideBarIndex.gallery}
+        <SectionsGallery
           category='gallery'
           onPushBlock={handlePushBlock}
         />
 
-        <BlocksGallery
+        {/* <BlocksGallery
           category='header'
           index={SideBarIndex.header}
           onPushBlock={handlePushBlock}
@@ -99,7 +104,7 @@ function Home(props) {
         />
 
         <Output html={innerHTML} />
-        <Inspector />
+        <Inspector /> */}
       </WideSidebar>
       <Preview html={innerHTML} />;
     </div>

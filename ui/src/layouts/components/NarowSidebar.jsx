@@ -1,26 +1,40 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeActiveTab } from 'store/features/config';
-import SideBarIndex from 'constants/SideBarIndex';
+import {
+  changeNameActiveTab,
+  changeSlugActiveTab,
+  selectCategorySidebarPaneState,
+} from 'store/features/sidebarCategorySlice';
+import SidebarSlugLocal from 'constants/SidebarSlugLocal';
 import { getAllCategories } from 'services/CategoriesRepository';
+import SidebarNameLocal from 'constants/SidebarNameLocal';
 
 NarrowSidebar.propTypes = {};
 function NarrowSidebar(props) {
   const dispatch = useDispatch();
 
-  const { activeTab } = useSelector((state) => state.config);
+  // local state
+  const [categories, setCategories] = useState([]);
 
-  function handleChangeActiveTab(index) {
-    dispatch(changeActiveTab(index));
+  const { slugActiveTab } = useSelector(selectCategorySidebarPaneState);
+
+  function handleChangeActiveTab(slug, name) {
+    dispatch(changeSlugActiveTab(slug));
+    dispatch(changeNameActiveTab(name));
   }
 
   useEffect(() => {
     loadCategories();
 
-    async function loadCategories() {
-      var results = await getAllCategories();
-      console.log(results);
+    function loadCategories() {
+      getAllCategories().then((data) => {
+        if (data) {
+          setCategories(data);
+        } else {
+          setCategories([]);
+        }
+      });
     }
   }, []);
 
@@ -30,113 +44,50 @@ function NarrowSidebar(props) {
         <button
           type='button'
           className={`btn btn-sidebar btn-block m-0 ${
-            activeTab === SideBarIndex.inspector ? 'active-button' : ''
+            slugActiveTab === SidebarSlugLocal.inspector ? 'active-button' : ''
           }`}
-          onClick={() => handleChangeActiveTab(SideBarIndex.inspector)}
+          onClick={() =>
+            handleChangeActiveTab(
+              SidebarSlugLocal.inspector,
+              SidebarNameLocal.inspector,
+            )
+          }
         >
           <span className='material-icons'>edit</span>
         </button>
         <button
           type='button'
           className={`btn btn-sidebar btn-block m-0 ${
-            activeTab === SideBarIndex.search ? 'active-button' : ''
+            slugActiveTab === SidebarSlugLocal.search ? 'active-button' : ''
           }`}
-          onClick={() => handleChangeActiveTab(SideBarIndex.search)}
+          onClick={() =>
+            handleChangeActiveTab(
+              SidebarSlugLocal.search,
+              SidebarNameLocal.search,
+            )
+          }
         >
           <span className='material-icons'>search</span>
         </button>
-        <button
-          type='button'
-          className={`btn btn-sidebar btn-block m-0 ${
-            activeTab === SideBarIndex.header ? 'active-button' : ''
-          }`}
-          onClick={() => handleChangeActiveTab(SideBarIndex.header)}
-        >
-          <span className='material-icons'>view_quilt</span>
-        </button>
-        <button
-          type='button'
-          className={`btn btn-sidebar btn-block m-0 ${
-            activeTab === SideBarIndex.article ? 'active-button' : ''
-          }`}
-          onClick={() => handleChangeActiveTab(SideBarIndex.article)}
-        >
-          <span className='material-icons'>subject</span>
-        </button>
-        <button
-          type='button'
-          className={`btn btn-sidebar btn-block m-0 ${
-            activeTab === SideBarIndex.gallery ? 'active-button' : ''
-          }`}
-          onClick={() => handleChangeActiveTab(SideBarIndex.gallery)}
-        >
-          <span className='material-icons'>insert_photo</span>
-        </button>
-        <button
-          type='button'
-          className={`btn btn-sidebar btn-block m-0 ${
-            activeTab === SideBarIndex.ad ? 'active-button' : ''
-          }`}
-          onClick={() => handleChangeActiveTab(SideBarIndex.ad)}
-        >
-          <span className='material-icons'>featured_video</span>
-        </button>
-        <button
-          type='button'
-          className={`btn btn-sidebar btn-block m-0 ${
-            activeTab === SideBarIndex.video ? 'active-button' : ''
-          }`}
-          onClick={() => handleChangeActiveTab(SideBarIndex.video)}
-        >
-          <span className='material-icons'>perm_contact_calendar</span>
-        </button>
-        <button
-          type='button'
-          className={`btn btn-sidebar btn-block m-0 ${
-            activeTab === SideBarIndex.contact ? 'active-button' : ''
-          }`}
-          onClick={() => handleChangeActiveTab(SideBarIndex.contact)}
-        >
-          <span className='material-icons'>table_chart</span>
-        </button>
-        <button
-          type='button'
-          className={`btn btn-sidebar btn-block m-0 ${
-            activeTab === SideBarIndex.table_chart ? 'active-button' : ''
-          }`}
-          onClick={() => handleChangeActiveTab(SideBarIndex.table_chart)}
-        >
-          <span className='material-icons'>view_agenda</span>
-        </button>
-      </div>
-      <div>
-        <button
-          type='button'
-          className={`btn btn-sidebar btn-block m-0 ${
-            activeTab === SideBarIndex.output ? 'active-button' : ''
-          }`}
-          onClick={() => handleChangeActiveTab(SideBarIndex.output)}
-        >
-          <span className='material-icons'>save</span>
-        </button>
-        <button
-          type='button'
-          className={`btn btn-sidebar btn-block m-0 ${
-            activeTab === SideBarIndex.setting ? 'active-button' : ''
-          }`}
-          onClick={() => handleChangeActiveTab(SideBarIndex.setting)}
-        >
-          <span className='material-icons'>settings</span>
-        </button>
-        <button
-          type='button'
-          className={`btn btn-sidebar btn-block m-0 ${
-            activeTab === SideBarIndex.help ? 'active-button' : ''
-          }`}
-          onClick={() => handleChangeActiveTab(SideBarIndex.help)}
-        >
-          <span className='material-icons'>help_outline</span>
-        </button>
+
+        {categories.length > 0
+          ? categories.map((category, index) => {
+              const { name, icon, urlSlug } = category;
+              return (
+                <button
+                  key={index}
+                  type='button'
+                  className={`btn btn-sidebar btn-block m-0 ${
+                    slugActiveTab === urlSlug ? 'active-button' : ''
+                  }`}
+                  onClick={() => handleChangeActiveTab(urlSlug, name)}
+                  title={name}
+                >
+                  <span className='material-icons'>{icon}</span>
+                </button>
+              );
+            })
+          : null}
       </div>
     </div>
   );

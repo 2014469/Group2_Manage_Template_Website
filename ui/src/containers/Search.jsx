@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import staticBlocks from 'views/blocks';
-import BlockPreview from 'layouts/components/BlockPreview';
+import SectionPreview from 'layouts/components/SectionPreview';
 import { useSelector } from 'react-redux';
-import SideBarIndex from 'constants/SideBarIndex';
+import SidebarSlugLocal from 'constants/SidebarSlugLocal';
+import { selectCategorySidebarPaneState } from 'store/features/sidebarCategorySlice';
 
 Search.propTypes = {
   onPushBlock: PropTypes.func.isRequired,
@@ -11,7 +12,7 @@ Search.propTypes = {
 
 function Search(props) {
   const { onPushBlock } = props;
-  const { activeTab } = useSelector((state) => state.config);
+  const { slugActiveTab } = useSelector(selectCategorySidebarPaneState);
 
   const [searchValue, setSearchValue] = useState('');
 
@@ -19,7 +20,7 @@ function Search(props) {
     setSearchValue(newValue);
   }
 
-  if (activeTab !== SideBarIndex.search) return null;
+  if (slugActiveTab !== SidebarSlugLocal.search) return null;
 
   return (
     <div>
@@ -40,7 +41,7 @@ function Search(props) {
             block.name.toLowerCase().indexOf(searchValue.toLowerCase()) > -1
           ) {
             return (
-              <BlockPreview
+              <SectionPreview
                 key={blockId}
                 name={block.name}
                 blockId={blockId}

@@ -1,7 +1,10 @@
-import SideBarIndex from 'constants/SideBarIndex';
+import SidebarSlugLocal from 'constants/SidebarSlugLocal';
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { changePreviewMode } from 'store/features/config';
+import {
+  changePreviewMode,
+  selectCategorySidebarPaneState,
+} from 'store/features/sidebarCategorySlice';
 
 import PropTypes from 'prop-types';
 
@@ -18,7 +21,7 @@ function Preview(props) {
   function handleChangePreviewMode(mode) {
     dispatch(changePreviewMode(mode));
   }
-  const { previewMode } = useSelector((state) => state.config);
+  const { previewMode } = useSelector(selectCategorySidebarPaneState);
   return (
     <>
       <div className='page-content-wrapper overflow-hidden d-flex justify-content-center'>
@@ -37,33 +40,37 @@ function Preview(props) {
             </div>
             <div className='d-flex'>
               <button
-                onClick={() => handleChangePreviewMode(SideBarIndex.inspector)}
+                onClick={() =>
+                  handleChangePreviewMode(SidebarSlugLocal.inspector)
+                }
                 className={`btn btn-sm btn-preview-toolbar d-flex align-items-center ${
-                  previewMode === SideBarIndex.inspector ? 'active' : ''
+                  previewMode === SidebarSlugLocal.inspector ? 'active' : ''
                 }`}
               >
                 <span className='material-icons'>devices</span>
               </button>
               <button
-                onClick={() => handleChangePreviewMode(SideBarIndex.search)}
+                onClick={() => handleChangePreviewMode(SidebarSlugLocal.search)}
                 className={`btn btn-sm btn-preview-toolbar d-flex align-items-center ${
-                  previewMode === SideBarIndex.search ? 'active' : ''
+                  previewMode === SidebarSlugLocal.search ? 'active' : ''
                 }`}
               >
                 <span className='material-icons'>tv</span>
               </button>
               <button
-                onClick={() => handleChangePreviewMode(SideBarIndex.header)}
+                onClick={() => handleChangePreviewMode(SidebarSlugLocal.header)}
                 className={`btn btn-sm btn-preview-toolbar d-flex align-items-center ${
-                  previewMode === SideBarIndex.header ? 'active' : ''
+                  previewMode === SidebarSlugLocal.header ? 'active' : ''
                 }`}
               >
                 <span className='material-icons'>tablet</span>
               </button>
               <button
-                onClick={() => handleChangePreviewMode(SideBarIndex.gallery)}
+                onClick={() =>
+                  handleChangePreviewMode(SidebarSlugLocal.gallery)
+                }
                 className={`btn btn-sm btn-preview-toolbar d-flex align-items-center ${
-                  previewMode === SideBarIndex.gallery ? 'active' : ''
+                  previewMode === SidebarSlugLocal.gallery ? 'active' : ''
                 }`}
               >
                 <span className='material-icons'>smartphone</span>

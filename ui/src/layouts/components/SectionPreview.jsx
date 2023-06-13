@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-BlockPreview.propTypes = {
+SectionPreview.propTypes = {
   blockId: PropTypes.string,
   image: PropTypes.string,
   name: PropTypes.string,
   onPushBlock: PropTypes.func,
 };
 
-function BlockPreview(props) {
+function SectionPreview(props) {
   const { image, name, onPushBlock, blockId } = props;
 
   return (
@@ -33,4 +33,4 @@ function BlockPreview(props) {
   );
 }
 
-export default BlockPreview;
+export default SectionPreview;

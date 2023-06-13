@@ -1,11 +1,14 @@
-﻿using ManageTemplate.Core.Entities;
+﻿using ManageTemplate.Core.Contracts;
+using ManageTemplate.Core.DTO;
+using ManageTemplate.Core.Entities;
 
 namespace ManageTemplate.Services.Templates.Sections
 {
   public interface ISectionRepository
   {
-    Task<IList<T>> GetAllSectionsByCategorySlug<T>(
-      string slug,
+    Task<IPagedList<T>> GetPagedSectionsAsync<T>(
+      SectionQuery sectionQuery, 
+      IPagingParams pagingParams,
       Func<IQueryable<Section>, IQueryable<T>> mapper,
       CancellationToken cancellationToken = default);
   }
