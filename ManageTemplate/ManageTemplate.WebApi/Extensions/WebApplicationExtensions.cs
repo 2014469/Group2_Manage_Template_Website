@@ -3,6 +3,7 @@ using ManageTemplate.Data.Contexts;
 using ManageTemplate.Data.Seeders;
 using ManageTemplate.Services.Musics.Categories;
 using ManageTemplate.Services.Templates.Categories;
+using ManageTemplate.Services.Templates.SampledDataService;
 using ManageTemplate.Services.Templates.Sections;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,6 +25,7 @@ namespace ManageTemplate.WebApi.Extensions
 
       builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
       builder.Services.AddScoped<ISectionRepository, SectionRepository>();
+      builder.Services.AddScoped<ISampledDataRepository, SampledDataRepository>();
 
       return builder;
     }

@@ -11,5 +11,10 @@ namespace ManageTemplate.Services.Templates.Sections
       IPagingParams pagingParams,
       Func<IQueryable<Section>, IQueryable<T>> mapper,
       CancellationToken cancellationToken = default);
+
+    Task<Section> GetSectionBySlug(
+      string slug,
+      bool includeDetail = false,
+      CancellationToken cancellationToken = default);
   }
 }

@@ -32,12 +32,28 @@ namespace ManageTemplate.Services.Templates.Sections
       Func<IQueryable<Section>, IQueryable<T>> mapper,
       CancellationToken cancellationToken = default)
     {
-
-      await Console.Out.WriteLineAsync(pagingParams.ToString());
-            IQueryable<Section> sectionsFitler = FilterSections(query);
+      IQueryable<Section> sectionsFitler = FilterSections(query);
 
       return await mapper(sectionsFitler)
         .ToPagedListAsync<T>(pagingParams, cancellationToken);
+    }
+
+    public async Task<Section> GetSectionBySlug(
+      string slug,
+      bool includeDetail = false,
+      CancellationToken cancellationToken = default)
+    {
+      if (includeDetail)
+      {
+        return await _context.Set<Section>()
+            .Include(s => s.ExampledDatas)
+          .Where(s => s.UrlSlug.Equals(slug))
+          .FirstOrDefaultAsync(cancellationToken);
+      }
+
+      return await _context.Set<Section>()
+        .Where(s => s.UrlSlug.Equals(slug))
+        .FirstOrDefaultAsync(cancellationToken);
     }
   }
 }
