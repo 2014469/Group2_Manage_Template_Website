@@ -1,24 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import staticBlocks from 'views/blocks';
 import SectionPreview from 'layouts/components/SectionPreview';
 import SidebarSlugLocal from 'constants/SidebarSlugLocal';
-import { getCategoryBySlug } from 'services/CategoriesRepository';
 import SectionsRepository from 'services/SectionsRepository';
 import { selectCategorySidebarPaneState } from 'store/features/sidebarCategorySlice';
-import section from 'views/section';
 import { concatUrlImages } from 'utils/concatUrlImages';
 import SidebarNameLocal from 'constants/SidebarNameLocal';
 
-SectionsGallery.propTypes = {
-  onPushBlock: PropTypes.func.isRequired,
-  // category: PropTypes.string.isRequired,
-};
+SectionsGallery.propTypes = {};
 
 function SectionsGallery(props) {
-  const { onPushBlock, category } = props;
-
   // local state
   const [sections, setSections] = useState([]);
 
@@ -44,20 +36,21 @@ function SectionsGallery(props) {
 
   return (
     <>
-      {Object.values(SidebarNameLocal).indexOf(nameActiveTab) > -1 ? null : (
+      {Object.values(SidebarSlugLocal).indexOf(slugActiveTab) > -1 ? null : (
         <>
           <h5>Category: {nameActiveTab}</h5>
           <hr />
           {sections.length > 0 ? (
             <>
-              {sections.map((section, index) => {
-                console.log(section);
+              {sections.map((section) => {
                 const { name, previewImageUrl, urlSlug, id } = section;
 
                 return (
                   <SectionPreview
                     key={id}
                     name={name}
+                    blockId={id}
+                    sectionSlug={urlSlug}
                     image={concatUrlImages(previewImageUrl)}
                   />
                 );

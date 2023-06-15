@@ -8,12 +8,12 @@ const initialState = {
   documentId: 'document1',
 };
 
-const layoutSlice = createSlice({
-  name: 'layout',
+const sectionLayoutEditingSlice = createSlice({
+  name: 'sectionLayoutEditing',
   initialState,
   reducers: {
     pushBlock: (state, action) => {
-      const { blockId } = action.payload;
+      const { blockId, data } = action.payload;
       return {
         ...state,
         blocks: [
@@ -22,7 +22,7 @@ const layoutSlice = createSlice({
             uuid: uuidv4(),
             blockId: blockId,
             data: {
-              ...staticBlocks[blockId].defaultData,
+              ...data,
             },
           },
         ],
@@ -79,6 +79,10 @@ export const {
   changeBlockData,
   reorderLayout,
   setSelectedBlock,
-} = layoutSlice.actions;
+} = sectionLayoutEditingSlice.actions;
 
-export const layoutSliceReducer = layoutSlice.reducer;
+export const selectSectionLayoutEditingState = (state) =>
+  state.sectionLayoutEditing;
+
+export const sectionLayoutEditingSliceReducer =
+  sectionLayoutEditingSlice.reducer;

@@ -6,6 +6,10 @@ const SectionsRepository = {
       CategorySlug: slugCate,
     });
   },
+
+  getDetailSectionBySlug(slug) {
+    return get_api(`/sections/${slug}`);
+  },
 };
 
 export default SectionsRepository;

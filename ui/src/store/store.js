@@ -1,9 +1,9 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { layoutSliceReducer } from './features/layout';
+import { sectionLayoutEditingSliceReducer } from './features/sectionLayoutSlice';
 import { categorySidebarPaneReducer } from './features/sidebarCategorySlice';
 
 const reducer = combineReducers({
-  layout: layoutSliceReducer,
+  sectionLayoutEditing: sectionLayoutEditingSliceReducer,
   categorySidebarPane: categorySidebarPaneReducer,
 });
 

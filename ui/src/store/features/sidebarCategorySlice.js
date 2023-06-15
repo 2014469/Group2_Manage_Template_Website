@@ -5,6 +5,7 @@ import SidebarSlugLocal from 'constants/SidebarSlugLocal';
 const initialState = {
   slugActiveTab: SidebarSlugLocal.inspector,
   nameActiveTab: SidebarNameLocal.inspector,
+  previewMode: 0,
 };
 
 const categorySidebarPaneSlice = createSlice({

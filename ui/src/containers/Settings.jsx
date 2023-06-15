@@ -2,7 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import SidebarSlugLocal from 'constants/SidebarSlugLocal';
-import { changeDocumentId } from 'store/features/layout';
+import {
+  changeDocumentId,
+  selectSectionLayoutEditingState,
+} from 'store/features/sectionLayoutSlice';
 import staticDocuments from 'views/documents';
 import { selectCategorySidebarPaneState } from 'store/features/sidebarCategorySlice';
 
@@ -13,7 +16,7 @@ function Settings(props) {
 
   // global state
   const { slugActiveTab } = useSelector(selectCategorySidebarPaneState);
-  const { documentId } = useSelector((state) => state.layout);
+  const { documentId } = useSelector(selectSectionLayoutEditingState);
 
   if (slugActiveTab !== SidebarSlugLocal.setting) return null;
 

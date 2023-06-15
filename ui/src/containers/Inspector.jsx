@@ -1,7 +1,11 @@
 import SidebarSlugLocal from 'constants/SidebarSlugLocal';
 import { DebounceInput } from 'react-debounce-input';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeBlockData, deleteBlock } from 'store/features/layout';
+import {
+  changeBlockData,
+  deleteBlock,
+  selectSectionLayoutEditingState,
+} from 'store/features/sectionLayoutSlice';
 import { selectCategorySidebarPaneState } from 'store/features/sidebarCategorySlice';
 import staticBlocks from 'views/blocks';
 
@@ -13,7 +17,9 @@ function Inspector(props) {
   // global states
   const { slugActiveTab } = useSelector(selectCategorySidebarPaneState);
 
-  const { selectedBlockUuid, blocks } = useSelector((state) => state.layout);
+  const { selectedBlockUuid, blocks } = useSelector(
+    selectSectionLayoutEditingState,
+  );
 
   function handleChangeBlockData(blockUuid, key, value) {
     dispatch(changeBlockData({ blockUuid, key, value }));
@@ -33,7 +39,9 @@ function Inspector(props) {
       <div className='text-center'>First add and select block section</div>
     );
   }
-  const config = staticBlocks[block.blockId].config;
+
+  console.log(block);
+  const config = block.data.config;
 
   return (
     <div>
@@ -48,6 +56,7 @@ function Inspector(props) {
       </div>
       <hr />
       {Object.keys(config).map((el, index) => {
+        console.log(el);
         if (config[el].type === 'string') {
           return (
             <div
@@ -60,7 +69,7 @@ function Inspector(props) {
                 type='text'
                 className='form-control'
                 placeholder={config[el].name}
-                value={block.data[el]}
+                value={block.data.defaultData[el]}
                 onChange={(e) =>
                   handleChangeBlockData(selectedBlockUuid, el, e.target.value)
                 }
@@ -79,7 +88,7 @@ function Inspector(props) {
                 type='color'
                 className='form-control'
                 placeholder={config[el].name}
-                value={block.data[el]}
+                value={block.data.defaultData[el]}
                 onChange={(e) =>
                   handleChangeBlockData(selectedBlockUuid, el, e.target.value)
                 }

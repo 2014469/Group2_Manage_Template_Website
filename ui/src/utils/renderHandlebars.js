@@ -6,19 +6,25 @@ import staticDocuments from '../views/documents';
 import section from '../views/section';
 import staticBlocks from '../views/blocks';
 import { useSelector } from 'react-redux';
+import { selectSectionLayoutEditingState } from 'store/features/sectionLayoutSlice';
 
 function RenderHanldebars() {
-  const layout = useSelector((state) => state.layout);
-  const { blocks, documentId } = layout;
+  const sectionLayoutEditing = useSelector(selectSectionLayoutEditingState);
 
-  const innerHTML = blocks.reduce((acc, layoutBlock) => {
-    const blockHbs = staticBlocks[layoutBlock.blockId].hbs;
-    const blockTemplate = Handlebars.compile(blockHbs);
-    const blockHTML = blockTemplate(layoutBlock.data);
+  const { blocks, documentId } = sectionLayoutEditing;
+
+  const innerHTML = blocks.reduce((acc, sectionData) => {
+    console.log(sectionData);
+    const { hbs, defaultData } = sectionData.data;
+
+    const blockTemplate = Handlebars.compile(hbs);
+
+    const blockHTML = blockTemplate(defaultData);
+
     const sectionTemplate = Handlebars.compile(section);
     const sectionHTML = sectionTemplate({
       content: blockHTML,
-      uuid: layoutBlock.uuid,
+      uuid: sectionData.uuid,
     });
     return `${acc}${sectionHTML}`;
   }, ``);
